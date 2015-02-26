@@ -33,10 +33,10 @@ angular.module('app', [])
         $scope.player1.score = 0;
       }
       $scope.$apply();
-      var audio = new Audio('ping.mp3');
+      var audio = new Audio('/ping.mp3');
       audio.play();
       if((($scope.player1.score + $scope.player2.score) % 5) === 0 ) {
-        var audio = new Audio('switch.mp3');
+        var audio = new Audio('/switch.mp3');
         audio.play();
       }
     }
@@ -48,10 +48,10 @@ angular.module('app', [])
         $scope.player2.score = 0;
       }
       $scope.$apply();
-      var audio = new Audio('ping.mp3');
+      var audio = new Audio('/ping.mp3');
       audio.play();
       if((($scope.player1.score + $scope.player2.score) % 5) === 0 ) {
-        var audio = new Audio('switch.mp3');
+        var audio = new Audio('/switch.mp3');
         audio.play();
       }
     }
