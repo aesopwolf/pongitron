@@ -27,3 +27,11 @@ h1 {
   height: 100%;
   width: 100%;
 }
+
+.dot {
+  border-right: 4px dotted white;
+}
+
+.col-xs-6 {
+  padding-bottom: 200px;
+}
