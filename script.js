@@ -1,3 +1,6 @@
+var switchService = new Audio('switch.mp3');
+var ping = new Audio('ping.mp3');
+
 angular.module('app', [])
 .controller('MainController', function($scope, $rootScope, $document) {
   $document.bind('keyup', function(event) {
@@ -15,11 +18,10 @@ angular.module('app', [])
         $scope.player1.score = 0;
       }
       $scope.$apply();
-      var audio = new Audio('ping.mp3');
-      audio.play();
+
+      ping.play();
       if((($scope.player1.score + $scope.player2.score) % 5) === 0 ) {
-        var audio = new Audio('switch.mp3');
-        audio.play();
+        switchService.play();
       }
     }
 
@@ -30,11 +32,9 @@ angular.module('app', [])
         $scope.player2.score = 0;
       }
       $scope.$apply();
-      var audio = new Audio('ping.mp3');
-      audio.play();
+      ping.play();
       if((($scope.player1.score + $scope.player2.score) % 5) === 0 ) {
-        var audio = new Audio('switch.mp3');
-        audio.play();
+        switchService.play();
       }
     }
 
