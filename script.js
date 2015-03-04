@@ -10,10 +10,18 @@ angular.module('app', [])
 
   // variables
   /***************************************/
-  var player1ResetCounter = 0;
-  var player1Reset = false;
-  var player2ResetCounter = 0;
-  var player2Reset = false;
+  var meta = {
+    one: {
+      resetCounter: 0,
+      reset: false,
+      lastTime: null,
+    },
+    two: {
+      resetCounter: 0,
+      reset: false,
+      lastTime: null
+    }
+  };
 
   $scope.player = {one: 0, two: 0};
   $scope.flash1 = false;
@@ -23,19 +31,19 @@ angular.module('app', [])
   /***************************************/
   $scope.$on('keydown', function(n, event) {
     if(event.keyCode === 49) {
-      player1ResetCounter++;
-      if(player1ResetCounter === 10) {
+      meta.one.resetCounter++;
+      if(meta.one.resetCounter === 10) {
         ping.play();
-        player1Reset = true;
+        meta.one.reset = true;
         $scope.player.one = 0;
         $scope.$apply();
       }
     }
     if(event.keyCode === 86) {
-      player2ResetCounter++;
-      if(player2ResetCounter === 10) {
+      meta.two.resetCounter++;
+      if(meta.two.resetCounter === 10) {
         ping.play();
-        player2Reset = true;
+        meta.two.reset = true;
         $scope.player.two = 0;
         $scope.$apply();
       }
@@ -46,7 +54,11 @@ angular.module('app', [])
   /***************************************/
   $scope.$on('keyup', function(n, event) {
     // player 1
-    if(event.keyCode === 49 && !player1Reset) {
+    //-----------------
+    if((Date.now() - meta.one.lastTime) < 500) {
+      // do nothing: prevents them hitting it twice on accident
+    }
+    else if(event.keyCode === 49 && !meta.one.reset) {
       ping.play();
       $scope.flash1 = true;
       $scope.player.one += 1;
@@ -54,15 +66,20 @@ angular.module('app', [])
         $scope.player.one = 0;
       }
       $scope.$apply();
-      player1ResetCounter = 0;
+      meta.one.lastTime = Date.now();
+      meta.one.resetCounter = 0;
     }
-    else if(player1Reset) {
-      player1Reset = false;
-      player1ResetCounter = 0;
+    else if(meta.one.reset) {
+      meta.one.reset = false;
+      meta.one.resetCounter = 0;
     }
 
     // player 2
-    if(event.keyCode === 86 && !player2Reset) {
+    //-----------------
+    if((Date.now() - meta.two.lastTime) < 500) {
+      // do nothing: prevents them hitting it twice on accident
+    }
+    else if(event.keyCode === 86 && !meta.two.reset) {
       ping.play();
       $scope.flash1 = true;
       $scope.player.two += 1;
@@ -70,14 +87,16 @@ angular.module('app', [])
         $scope.player.two = 0;
       }
       $scope.$apply();
-      player2ResetCounter = 0;
+      meta.two.lastTime = Date.now();
+      meta.two.resetCounter = 0;
     }
-    else if(player2Reset) {
-      player2Reset = false;
-      player2ResetCounter = 0;
+    else if(meta.two.reset) {
+      meta.two.reset = false;
+      meta.two.resetCounter = 0;
     }
 
     // turn the flash background off
+    //-----------------
     setTimeout(function() {
       $scope.flash1 = false;
       $scope.flash2 = false;
