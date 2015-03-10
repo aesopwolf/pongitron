@@ -1,7 +1,7 @@
 var switchService = new Audio('switch.mp3');
 var ping = new Audio('ping.mp3');
 
-angular.module('app', [])
+angular.module('app', ['ngFitText'])
 .controller('MainController', function($scope, $rootScope, $document) {
   // keybindings
   /***************************************/
@@ -81,7 +81,7 @@ angular.module('app', [])
     }
     else if(event.keyCode === 86 && !meta.two.reset) {
       ping.play();
-      $scope.flash1 = true;
+      $scope.flash2 = true;
       $scope.player.two += 1;
       if($scope.player.two > 20) {
         $scope.player.two = 0;

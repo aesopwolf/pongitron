@@ -1,3 +1,7 @@
+body, html {
+  height: 100%;
+}
+
 body {
   background-color: #000;
   color: #fff;
@@ -6,7 +10,6 @@ body {
 h1 {
   font-size: 20em;
 }
-
 
 #flash1 {
   background-color: red;
@@ -32,6 +35,21 @@ h1 {
   border-right: 4px dotted white;
 }
 
-.col-xs-6 {
-  padding-bottom: 200px;
+.table {
+  display: table;
+  margin-bottom: 0;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 50%;
 }
