@@ -1,0 +1,23 @@
+{
+  "name": "pongitron",
+  "version": "0.1.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "dev": "hs .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aesopwolf/pongitron.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aesopwolf/pongitron/issues"
+  },
+  "homepage": "https://github.com/aesopwolf/pongitron",
+  "devDependencies": {
+    "http-server": "^0.7.5"
+  }
+}
