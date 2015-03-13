@@ -150,8 +150,10 @@ angular.module('app', ['ngFitText'])
           ping.play();
           $scope.flash1 = true;
           if($scope.player.one === "D" && $scope.player.two === "D") {
+            ping.play();
             $scope.player.one = "A";
           } else if ($scope.player.one === "D" && $scope.player.two === "A") {
+            ping.play();
             $scope.player.two = "D";
           } else {
             win.play();
@@ -177,8 +179,10 @@ angular.module('app', ['ngFitText'])
           ping.play();
           $scope.flash2 = true;
           if($scope.player.two === "D" && $scope.player.one === "D") {
+            ping.play();
             $scope.player.two = "A";
           } else if ($scope.player.two === "D" && $scope.player.one === "A") {
+            ping.play();
             $scope.player.one = "D";
           } else {
             win.play();
