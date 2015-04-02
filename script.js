@@ -63,6 +63,9 @@ angular.module('app', ['ngFitText'])
     // increase the counter when they let go of the button
     /***************************************/
     $scope.keyup = $scope.$on('keyup', function(n, event) {
+      $scope.flash1 = false;
+      $scope.flash2 = false;
+      
       // player 1
       //-----------------
       if((Date.now() - meta.one.lastTime) < 500) {
@@ -104,14 +107,6 @@ angular.module('app', ['ngFitText'])
         meta.two.reset = false;
         meta.two.resetCounter = 0;
       }
-
-      // turn the flash background off
-      //-----------------
-      setTimeout(function() {
-        $scope.flash1 = false;
-        $scope.flash2 = false;
-        $scope.$apply();
-      }, 1000);
     });
   }
 
