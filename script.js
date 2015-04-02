@@ -77,6 +77,7 @@ angular.module('app', ['ngFitText'])
         $scope.player.one += 1;
         if($scope.player.one > 20) {
           $scope.player.one = 0;
+          $scope.flash1 = false;
           win.play();
         }
         $scope.$apply();
@@ -99,6 +100,7 @@ angular.module('app', ['ngFitText'])
         $scope.player.two += 1;
         if($scope.player.two > 20) {
           $scope.player.two = 0;
+          $scope.flash2 = false;
           win.play();
         }
         $scope.$apply();
