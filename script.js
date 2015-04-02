@@ -159,6 +159,7 @@ angular.module('app', ['ngFitText'])
             $scope.player.two = "D";
           } else {
             win.play();
+            $scope.flash1 = false;
             $scope.player = {one: 0, two: 0};
             resetListeners();
             startGame();
@@ -188,6 +189,7 @@ angular.module('app', ['ngFitText'])
             $scope.player.one = "D";
           } else {
             win.play();
+            $scope.flash2 = false;
             $scope.player = {one: 0, two: 0};
             resetListeners();
             startGame();
