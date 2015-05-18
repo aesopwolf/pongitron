@@ -1,26 +1,48 @@
-<!DOCTYPE html>
-<html ng-app="app">
+
+<!doctype html>
+
+<html>
   <head>
     <title>Pongitron</title>
-    <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="components/angular/angular.min.js"></script>
-    <script src="components/ngFitText/src/ng-FitText.js"></script>
-    <script src="script.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script>html5.addElements('todo')</script>
+    <![endif]-->
+
   </head>
-  <body ng-controller="MainController">
-    <div id="flash1" ng-show="flash1"></div>
-    <div id="flash2" ng-show="flash2"></div>
-    <div class="table">
-      <div class="row">
-        <div class="cell dot">
-          <h1 data-fittext data-fittext-max="500">{{player.two}}</h1>
-        </div>
-        <div class="cell">
-          <h1 data-fittext data-fittext-max="500">{{player.one}}</h1>
-        </div>
-      </div>
-    </div>
+
+  <body>
+    <app></app>
+
+    <script src="app.tag" type="riot/tag"></script>
+    <script src="/components/riot/riot+compiler.js"></script>
+
+    <script>
+    riot.route(function(countTo) {
+
+      if(['21', '11'].indexOf(countTo) < 0) {
+        countTo = localStorage.getItem('countTo') || '21';
+        riot.route(countTo);
+      }
+
+      localStorage.setItem("countTo", countTo);
+
+      riot.mount('app', {
+        countTo: countTo
+      });
+    });
+
+    riot.route.exec(function(countTo) {
+      countTo = countTo || localStorage.getItem('countTo') || '21';
+      if(['21', '11'].indexOf(countTo) < 0) {
+        countTo = '21';
+      }
+      riot.route(countTo);
+    })
+    </script>
   </body>
 </html>
