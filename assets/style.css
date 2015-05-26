@@ -1,0 +1,160 @@
+/*
+#ef4988
+#27A0BC
+*/
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0;
+  font-size: 35vw;
+}
+
+header {
+  background-color: transparent;
+  padding-top: 20px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+  bottom: 0;
+  padding-bottom: 20px;
+}
+
+button {
+  background: #fff;
+  border: 4px solid #333;
+  border-radius: 2em;
+}
+
+#app {
+  background-color: #222;
+  height: 100%;
+}
+
+.player {
+  color: #fff;
+  display: table-cell;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.left {
+  /*float: left;*/
+}
+
+.right {
+  /*float: right;*/
+}
+
+.player2active {
+  background-color: #ef4988;
+}
+
+.player1active {
+  background-color: #27a0bc;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.table-row {
+  display: table-row;
+}
+
+
+/* Toggle Button*/
+/*------*/
+.tgl {
+  display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0 auto;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+.tgl-flat + .tgl-btn {
+  padding: 2px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  background: #fff;
+  border: 4px solid #333;
+  border-radius: 2em;
+}
+.tgl-flat + .tgl-btn:after {
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  background: #333;
+  content: "21";
+  color: #fff;
+  text-align: center;
+  border-radius: 1em;
+}
+.tgl-flat:checked + .tgl-btn {
+  border: 4px solid #333;
+}
+.tgl-flat:checked + .tgl-btn:after {
+  left: 50%;
+  background: #333;
+  content: '11';
+  text-align: center
+  color: #fff;
+}
+
+
+/* CHROME FIX */
+textarea:focus, input:focus{
+  outline: 0;
+}
+
+*:focus {
+  outline: 0;
+}
