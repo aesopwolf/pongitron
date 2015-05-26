@@ -18,14 +18,6 @@ let Player = class Player extends React.Component {
     let currentScore = this.props.game.scores.length - 1;
     let myScore = this.props.player === 1 ? game.scores[currentScore].player1 : game.scores[currentScore].player2
 
-    // find which side should this score card be on
-    // let side;
-    // if(game.ltr) {
-    //   side = this.props.player === 1 ? 'left' : 'right';
-    // } else {
-    //   side = this.props.player === 2 ? 'left' : 'right';
-    // }
-
     // decide to color the background or not
     let previousScore = this.props.game.scores.length > 1 ? this.props.game.scores.length - 2 : this.props.game.scores.length - 1;
     let player1active = game.scores[currentScore].player1 !== game.scores[previousScore].player1;
@@ -50,6 +42,24 @@ let Player = class Player extends React.Component {
       }
       if(this.props.player === 2) {
         tally.push(this.props.game.scores[i].player2);
+      }
+    }
+
+    // figure out the deuce lettering
+    let me = this.props.player === 1 ? 'player1' : 'player2';
+    let them = this.props.player === 1 ? 'player2' : 'player1';
+    if(game.deuce) {
+      if(game.scores[currentScore][me] - game.scores[currentScore][them] === 1) {
+        myScore = 'A';
+      }
+      else if(game.scores[currentScore][me] - game.scores[currentScore][them] === 2) {
+        myScore = ':)';
+      }
+      else if(game.scores[currentScore][me] - game.scores[currentScore][them] === -2) {
+        myScore = ':(';
+      }
+      else {
+        myScore = 'D';
       }
     }
 
@@ -153,10 +163,17 @@ export default class App extends React.Component {
     let player1new = newScores[newScores.length - 1].player1;
     let player2new = newScores[newScores.length - 1].player2;
     let switchCount = this.state.playingTo === 21 ? 5 : 2;
+    let deuceGame;
 
+    // deuce
+    if(player1new === this.state.playingTo - 1 && player2new === this.state.playingTo - 1) {
+      deuce.play();
+      this.setState({scores: newScores, deuce: true});
+      return;
+    }
 
     // play sound to switch service
-    if(player1new === 0 && player2new === 0) {
+    if((player1new === 0 && player2new === 0) || this.state.deuce) {
       // do nothing
     }
     else if((player1new + player2new) % switchCount === 0) {
@@ -164,19 +181,30 @@ export default class App extends React.Component {
     }
 
     // normal game over
-    if(player1new === this.state.playingTo || player2new === this.state.playingTo) {
-      win.play();
+    if(this.state.deuce) {
+      // do nothing
+    }
+    else if(player1new === this.state.playingTo || player2new === this.state.playingTo) {
       // todo: save game to localstorage
       // todo: show replay screen
+      win.play();
+      newScores = [{
+        player1: player1new === this.state.playingTo ? ':)' : ':(',
+        player2: player2new === this.state.playingTo ? ':)' : ':('
+      }];
+      this.setState({resetMe: true});
+    }
+
+    if(this.state.deuce && Math.abs(player1new - player2new) === 2) {
+      win.play();
+    }
+    if(this.state.deuce && Math.abs(player1new - player2new) === 3) {
       newScores = [{
         player1: 0,
         player2: 0
       }];
-    }
-
-    // deuce
-    if(player1new === this.state.playingTo - 1 && player2new === this.state.playingTo - 1) {
-      deuce.play();
+      this.setState({scores: newScores, deuce: false});
+      return;
     }
 
     this.setState({scores: newScores})
@@ -195,7 +223,6 @@ export default class App extends React.Component {
   }
 
   changeScoreCardSides() {
-    console.log('sup');
     this.setState({
       ltr: !this.state.ltr
     })
@@ -218,7 +245,6 @@ export default class App extends React.Component {
         <footer>
           <input className='tgl tgl-flat' id='cb4' type='checkbox' defaultChecked={toEleven} />
           <label className='tgl-btn' htmlFor='cb4' onClick={this.changePlayingTo.bind(this)}></label>
-          {/*<button onClick={this.changeDirectionOfScores.bind(this)}>Swap Scores</button>*/}
         </footer>
       </div>
     );
