@@ -132,7 +132,7 @@ export default class App extends React.Component {
     };
 
     // add score to player2
-    if(e.keyCode === 86) {
+    if(e.keyCode === 44) {
       ping.play();
       newScores.push({
         player1: player1,
