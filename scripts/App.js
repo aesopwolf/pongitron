@@ -189,10 +189,9 @@ export default class App extends React.Component {
       // todo: show replay screen
       win.play();
       newScores = [{
-        player1: player1new === this.state.playingTo ? ':)' : ':(',
-        player2: player2new === this.state.playingTo ? ':)' : ':('
+        player1: 0,
+        player2: 0
       }];
-      this.setState({resetMe: true});
     }
 
     if(this.state.deuce && Math.abs(player1new - player2new) === 2) {
