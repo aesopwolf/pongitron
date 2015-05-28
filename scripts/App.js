@@ -6,6 +6,7 @@ let switchService = new Audio('assets/audio/switch-service.mp3');
 let ping = new Audio('assets/audio/ping.mp3');
 let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
+let fivedem = new Audio('assets/audio/fivedem.mp3');
 
 let Player = class Player extends React.Component {
   constructor(props) {
@@ -172,12 +173,23 @@ export default class App extends React.Component {
       return;
     }
 
+    var newScoresHead = newScores.length - 1;
+    var player1Streak = newScores[newScoresHead].player1 -
+        newScores[(newScoresHead >= 5) ? newScoresHead - 5 : 0].player1;
+    var player2Streak = newScores[newScoresHead].player2 -
+        newScores[(newScoresHead >= 5) ? newScoresHead - 5 : 0].player2;
+
     // play sound to switch service
-    if((player1new === 0 && player2new === 0) || this.state.deuce) {
-      // do nothing
+    if ((player1new === 0 && player2new === 0) || this.state.deuce) {
+        // do nothing
     }
-    else if((player1new + player2new) % switchCount === 0) {
-      switchService.play();
+    else if ((player1new + player2new) % switchCount === 0) {
+        if (player1Streak == 5 || player2Streak == 5) {
+            fivedem.play();
+        }
+        else {
+            switchService.play();
+        }
     }
 
     // normal game over
@@ -249,3 +261,4 @@ export default class App extends React.Component {
     );
   }
 }
+
