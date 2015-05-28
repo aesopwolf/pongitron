@@ -76,6 +76,41 @@ button {
   display: table-row;
 }
 
+.table-column {
+  display: table-column;
+}
+
+/* Timeline
+ * ---------- */
+.pingpongball {
+	background-color: #fff;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px; 
+	display:block;
+	margin-bottom:4px;
+}
+.player1
+{
+	margin-right:auto;
+	margin-left:0px;
+}
+.player2 {
+	margin-right:0px;
+	margin-left: auto;
+}
+
+.timeline {
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50px;
+	height:100%;
+	margin-top: 80px;
+}
+
 
 /* Toggle Button*/
 /*------*/

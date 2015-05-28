@@ -8,6 +8,40 @@ let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
 let fivedem = new Audio('assets/audio/fivedem.mp3');
 
+let PongBall = class PongBall extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		var playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball"; 
+		return (<div className={playerClass}></div>)
+	}
+}
+
+let Timeline = class Timeline extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		let game = this.props.game;
+		var balls = [];
+		for(var i = 1; i < game.scores.length ; i++)
+		{
+			
+			var whoScored = (game.scores[i].player1 - game.scores[i-1].player1 === 1) ? 1 : 2;
+			balls.push(<PongBall key={i} ltr={game.ltr} player={whoScored} />);
+		}
+
+		return (
+				<div className="timeline">
+				{balls}
+				</div>
+		       )
+	}
+}
+
 let Player = class Player extends React.Component {
   constructor(props) {
     super(props);
@@ -250,6 +284,7 @@ export default class App extends React.Component {
         <div className='table'>
           <div className='table-row'>
             <Player game={this.state} player={this.state.ltr ? 1 : 2} />
+	    <Timeline game={this.state} />
             <Player game={this.state} player={this.state.ltr ? 2 : 1} />
           </div>
         </div>
