@@ -14,8 +14,12 @@ let PongBall = class PongBall extends React.Component {
 	}
 
 	render() {
-		var playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball"; 
-		return (<div className={playerClass}></div>)
+		let playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball";
+		if (this.props.swapService) {
+			return (<div><div className={playerClass}></div><div className="swapServiceLine"></div></div>)
+		} else {
+			return (<div className={playerClass}></div>)
+		}
 	}
 }
 
@@ -26,17 +30,17 @@ let Timeline = class Timeline extends React.Component {
 
 	render() {
 		let game = this.props.game;
-		var balls = [];
-		for(var i = 1; i < game.scores.length ; i++)
-		{
-			
-			var whoScored = (game.scores[i].player1 - game.scores[i-1].player1 === 1) ? 1 : 2;
-			balls.push(<PongBall key={i} ltr={game.ltr} player={whoScored} />);
+		let balls = [];
+		let ballsDrop = game.scores.length - 40;
+		for(var i = (ballsDrop > 0)? ballsDrop : 1; i < game.scores.length; i++) {
+			let swapService = (game.scores[i].player1 + game.scores[i].player2) % (game.playingTo === 21 ? 5 : 2) === 0
+			let whoScored = (game.scores[i].player1 - game.scores[i-1].player1 === 1) ? 1 : 2;
+			balls.push(<PongBall key={i} ltr={game.ltr} player={whoScored} swapService={swapService} />);
 		}
 
 		return (
 				<div className="timeline">
-				{balls}
+					{balls}
 				</div>
 		       )
 	}
@@ -296,4 +300,3 @@ export default class App extends React.Component {
     );
   }
 }
-
