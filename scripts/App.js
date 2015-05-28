@@ -8,6 +8,40 @@ let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
 let fivedem = new Audio('assets/audio/fivedem.mp3');
 
+let PongBall = class PongBall extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		var playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball";
+		return (<div className={playerClass}></div>)
+	}
+}
+
+let Timeline = class Timeline extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		let game = this.props.game;
+		var balls = [];
+		for(var i = 1; i < game.scores.length ; i++)
+		{
+
+			var whoScored = (game.scores[i].player1 - game.scores[i-1].player1 === 1) ? 1 : 2;
+			balls.push(<PongBall key={i} ltr={game.ltr} player={whoScored} />);
+		}
+
+		return (
+				<div className="timeline">
+				{balls}
+				</div>
+		       )
+	}
+}
+
 let Player = class Player extends React.Component {
   constructor(props) {
     super(props);
@@ -194,12 +228,23 @@ export default class App extends React.Component {
       return;
     }
 
+    var newScoresHead = newScores.length - 1;
+    var player1Streak = newScores[newScoresHead].player1 -
+        newScores[(newScoresHead >= 5) ? newScoresHead - 5 : 0].player1;
+    var player2Streak = newScores[newScoresHead].player2 -
+        newScores[(newScoresHead >= 5) ? newScoresHead - 5 : 0].player2;
+
     // play sound to switch service
-    if((player1new === 0 && player2new === 0) || this.state.deuce) {
-      // do nothing
+    if ((player1new === 0 && player2new === 0) || this.state.deuce) {
+        // do nothing
     }
-    else if((player1new + player2new) % switchCount === 0) {
-      // switchService.play();
+    else if ((player1new + player2new) % switchCount === 0) {
+        if (player1Streak == 5 || player2Streak == 5) {
+            fivedem.play();
+        }
+        else {
+            switchService.play();
+        }
     }
 
     // normal game over
@@ -260,6 +305,7 @@ export default class App extends React.Component {
         <div className='table'>
           <div className='table-row'>
             <Player game={this.state} player={this.state.ltr ? 1 : 2} />
+	    <Timeline game={this.state} />
             <Player game={this.state} player={this.state.ltr ? 2 : 1} />
           </div>
         </div>
