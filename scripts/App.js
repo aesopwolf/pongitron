@@ -42,6 +42,40 @@ let Timeline = class Timeline extends React.Component {
 	}
 }
 
+let PongBall = class PongBall extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		var playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball"; 
+		return (<div className={playerClass}></div>)
+	}
+}
+
+let Timeline = class Timeline extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		let game = this.props.game;
+		var balls = [];
+		for(var i = 1; i < game.scores.length ; i++)
+		{
+			
+			var whoScored = (game.scores[i].player1 - game.scores[i-1].player1 === 1) ? 1 : 2;
+			balls.push(<PongBall key={i} ltr={game.ltr} player={whoScored} />);
+		}
+
+		return (
+				<div className="timeline">
+				{balls}
+				</div>
+		       )
+	}
+}
+
 let Player = class Player extends React.Component {
   constructor(props) {
     super(props);
