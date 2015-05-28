@@ -8,7 +8,6 @@ let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
 let fivedem = new Audio('assets/audio/fivedem.mp3');
 
-//make changes for help
 let PongBall = class PongBall extends React.Component {
 	constructor(props) {
 		super(props);
@@ -80,7 +79,6 @@ let Player = class Player extends React.Component {
     var theirPreviousScore = game.scores[game.scores.length - 1][them];
     for(var i = game.scores.length - 1; i >= 4; i--) {
       if(theirPreviousScore !== game.scores[i][them]) {
-        console.log('fived em');
         fivedem.play();
       }
     }
@@ -192,7 +190,7 @@ export default class App extends React.Component {
     };
 
     // add score to player2
-    if(e.keyCode === 55) {
+    if(e.keyCode === 51) {
       ping.play();
       newScores.push({
         player1: player1,
