@@ -73,24 +73,6 @@ let Player = class Player extends React.Component {
       activeString = 'player2active'
     }
 
-    // fived em
-    // recurse over the players last 5 scores
-    var fived = false;
-    var theirPreviousScore = game.scores[game.scores.length - 1][them];
-    for(var i = game.scores.length - 1; i >= 4; i--) {
-      if(theirPreviousScore !== game.scores[i][them]) {
-        fivedem.play();
-      }
-    }
-
-
-    if(fived) {
-      // do nothing
-    }
-    else if((game.scores[currentScore][them] + game.scores[currentScore][me]) % game.playingTo === 21 ? 5 : 2 === 0) {
-      switchService.play();
-    }
-
     // tally the total points earned during your service
     let tally = [];
     let switchCount = this.props.game.playingTo === 21 ? 5 : 2;
@@ -147,6 +129,7 @@ export default class App extends React.Component {
   }
 
   handlekeypress(e) {
+    console.log(e.keyCode);
     // prevent user from hitting button too fast
     if(Date.now() - this.state.lastPress < 200) {
       // todo: play error sound
@@ -189,7 +172,7 @@ export default class App extends React.Component {
     };
 
     // add score to player2
-    if(e.keyCode === 51) {
+    if(e.keyCode === 55) {
       ping.play();
       newScores.push({
         player1: player1,
