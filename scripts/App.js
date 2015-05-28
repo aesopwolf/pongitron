@@ -6,6 +6,7 @@ let switchService = new Audio('assets/audio/switch-service.mp3');
 let ping = new Audio('assets/audio/ping.mp3');
 let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
+let fivedem = new Audio('assets/audio/fivedem.mp3');
 
 let Player = class Player extends React.Component {
   constructor(props) {
@@ -13,13 +14,16 @@ let Player = class Player extends React.Component {
   }
 
   render() {
+    let me = this.props.player === 1 ? 'player1' : 'player2';
+    let them = this.props.player === 1 ? 'player2' : 'player1';
+
     // find the player's score
     let game = this.props.game;
     let currentScore = this.props.game.scores.length - 1;
     let myScore = this.props.player === 1 ? game.scores[currentScore].player1 : game.scores[currentScore].player2
 
     // decide to color the background or not
-    let previousScore = this.props.game.scores.length > 1 ? this.props.game.scores.length - 2 : this.props.game.scores.length - 1;
+    let previousScore = game.scores.length > 1 ? game.scores.length - 2 : game.scores.length - 1;
     let player1active = game.scores[currentScore].player1 !== game.scores[previousScore].player1;
     let player2active = game.scores[currentScore].player2 !== game.scores[previousScore].player2;
     let activeString;
@@ -29,6 +33,25 @@ let Player = class Player extends React.Component {
     }
     if(this.props.player === 2 && player2active) {
       activeString = 'player2active'
+    }
+
+    // fived em
+    // recurse over the players last 5 scores
+    var fived = false;
+    var theirPreviousScore = game.scores[game.scores.length - 1][them];
+    for(var i = game.scores.length - 1; i >= 4; i--) {
+      if(theirPreviousScore !== game.scores[i][them]) {
+        console.log('fived em');
+        fivedem.play();
+      }
+    }
+
+
+    if(fived) {
+      // do nothing
+    }
+    else if((game.scores[currentScore][them] + game.scores[currentScore][me]) % game.playingTo === 21 ? 5 : 2 === 0) {
+      switchService.play();
     }
 
     // tally the total points earned during your service
@@ -46,8 +69,6 @@ let Player = class Player extends React.Component {
     }
 
     // figure out the deuce lettering
-    let me = this.props.player === 1 ? 'player1' : 'player2';
-    let them = this.props.player === 1 ? 'player2' : 'player1';
     if(game.deuce) {
       if(game.scores[currentScore][me] - game.scores[currentScore][them] === 1) {
         myScore = 'A';
@@ -178,7 +199,7 @@ export default class App extends React.Component {
       // do nothing
     }
     else if((player1new + player2new) % switchCount === 0) {
-      switchService.play();
+      // switchService.play();
     }
 
     // normal game over
