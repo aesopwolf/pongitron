@@ -8,6 +8,7 @@ let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
 let fivedem = new Audio('assets/audio/fivedem.mp3');
 
+//make changes for help
 let PongBall = class PongBall extends React.Component {
 	constructor(props) {
 		super(props);
