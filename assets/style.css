@@ -86,7 +86,7 @@ button {
 	background-color: #fff;
 	border-radius: 50%;
 	width: 10px;
-	height: 10px; 
+	height: 10px;
 	display:block;
 	margin-bottom:4px;
 }
@@ -108,9 +108,14 @@ button {
 	margin-right: auto;
 	width: 50px;
 	height:100%;
-	margin-top: 80px;
+	margin-top: 70px;
 }
 
+.swapServiceLine {
+    border-bottom: 1px dashed #6f223f;
+    margin: 0 auto;
+    width: 15;
+}
 
 /* Toggle Button*/
 /*------*/
