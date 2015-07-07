@@ -129,6 +129,7 @@ export default class App extends React.Component {
   }
 
   handlekeypress(e) {
+		console.log(e);
     // prevent user from hitting button too fast
     if(Date.now() - this.state.lastPress < 200) {
       // todo: play error sound
@@ -152,26 +153,26 @@ export default class App extends React.Component {
     };
 
     // minus score from player1
-    if(e.keyCode === 50) {
-      // can't remove points if no one has any
-      if(newScores.length === 1) {
-        return;
-      }
-
-      // prevent player1 from removing player2 points
-      // also prevent player1 from removing their own points if player2 has
-      //   has made a point since player1 has
-      if(newScores[newScores.length - 1].player1 === newScores[newScores.length - 2].player1) {
-        return;
-      }
-
-      if(this.state.scores.length > 1) {
-        newScores.pop();
-      }
-    };
+    // if(e.keyCode === 51) {
+    //   // can't remove points if no one has any
+    //   if(newScores.length === 1) {
+    //     return;
+    //   }
+		//
+    //   // prevent player1 from removing player2 points
+    //   // also prevent player1 from removing their own points if player2 has
+    //   //   has made a point since player1 has
+    //   if(newScores[newScores.length - 1].player1 === newScores[newScores.length - 2].player1) {
+    //     return;
+    //   }
+		//
+    //   if(this.state.scores.length > 1) {
+    //     newScores.pop();
+    //   }
+    // };
 
     // add score to player2
-    if(e.keyCode === 102) {
+    if(e.keyCode === 50) {
       ping.play();
       newScores.push({
         player1: player1,
@@ -181,23 +182,23 @@ export default class App extends React.Component {
     };
 
     // minus score from player2
-    if(e.keyCode === 52) {
-      // can't remove points if no one has any
-      if(newScores.length === 1) {
-        return;
-      }
-
-      // prevent player2 from removing player1 points
-      // also prevent player2 from removing their own points if player1 has
-      //   has made a point since player2 has
-      if(newScores[newScores.length - 1].player2 === newScores[newScores.length - 2].player2) {
-        return;
-      }
-
-      if(this.state.scores.length > 1) {
-        newScores.pop();
-      }
-    };
+    // if(e.keyCode === 52) {
+    //   // can't remove points if no one has any
+    //   if(newScores.length === 1) {
+    //     return;
+    //   }
+		//
+    //   // prevent player2 from removing player1 points
+    //   // also prevent player2 from removing their own points if player1 has
+    //   //   has made a point since player2 has
+    //   if(newScores[newScores.length - 1].player2 === newScores[newScores.length - 2].player2) {
+    //     return;
+    //   }
+		//
+    //   if(this.state.scores.length > 1) {
+    //     newScores.pop();
+    //   }
+    // };
 
     // setup new variables for switchService, gameOver, deuce
     let player1new = newScores[newScores.length - 1].player1;
