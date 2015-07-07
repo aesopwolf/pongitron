@@ -143,7 +143,7 @@ export default class App extends React.Component {
     let player2 = newScores[newScores.length - 1].player2;
 
     // add score to player1
-    if(e.keyCode === 100) {
+    if(e.keyCode === 49) {
       ping.play();
       newScores.push({
         player1: player1 + 1 < 0 ? 0 : player1 + 1,
