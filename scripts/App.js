@@ -129,7 +129,7 @@ export default class App extends React.Component {
   }
 
   handlekeypress(e) {
-		console.log(e);
+		// console.log(e);
     // prevent user from hitting button too fast
     if(Date.now() - this.state.lastPress < 200) {
       // todo: play error sound
