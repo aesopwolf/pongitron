@@ -3,6 +3,9 @@
 import React from 'react';
 import _ from 'lodash';
 
+const KEY_1 = 49;
+const KEY_2 = 50;
+
 let switchService = new Audio('assets/audio/switch-service.mp3');
 let ping = new Audio('assets/audio/ping.mp3');
 let win = new Audio('assets/audio/you-win.mp3');
@@ -144,7 +147,7 @@ export default class App extends React.Component {
     let player2 = newScores[newScores.length - 1].player2;
 
     // add score to player1
-    if(e.keyCode === 49) {
+    if(e.keyCode === KEY_1) {
       ping.play();
       newScores.push({
         player1: player1 + 1 < 0 ? 0 : player1 + 1,
@@ -173,7 +176,7 @@ export default class App extends React.Component {
     // };
 
     // add score to player2
-    if(e.keyCode === 119) {
+    if(e.keyCode === KEY_2) {
       ping.play();
       newScores.push({
         player1: player1,
