@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Scoreboard for table tennis",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
