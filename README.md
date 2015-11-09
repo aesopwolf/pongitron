@@ -1,4 +1,4 @@
 Pongitron
 =========
 
-![pongitron](https://raw.githubusercontent.com/aesopwolf/pongitron/master/assets/pongitron.jpg)
+Press 1 for player 1, and press 2 for player 2.
