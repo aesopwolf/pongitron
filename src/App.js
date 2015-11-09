@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 
 const KEY_1 = 49;
@@ -12,13 +10,13 @@ let win = new Audio('assets/audio/you-win.mp3');
 let deuce = new Audio('assets/audio/deuce.mp3');
 let fivedem = new Audio('assets/audio/fivedem.mp3');
 
-let PongBall = class PongBall extends React.Component {
+let PongBall = class PongBall extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
-		let playerClass = "player" + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + " pingpongball";
+		let playerClass = 'player' + (this.props.ltr ? this.props.player : (this.props.player === 1) ? 2 : 1) + ' pingpongball';
 		if (this.props.swapService) {
 			return (<div><div className={playerClass}></div><div className="swapServiceLine"></div></div>)
 		} else {
@@ -27,7 +25,7 @@ let PongBall = class PongBall extends React.Component {
 	}
 }
 
-let Timeline = class Timeline extends React.Component {
+let Timeline = class Timeline extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -50,7 +48,7 @@ let Timeline = class Timeline extends React.Component {
 	}
 }
 
-let Player = class Player extends React.Component {
+let Player = class Player extends Component {
   constructor(props) {
     super(props);
   }
@@ -108,7 +106,7 @@ let Player = class Player extends React.Component {
     }
 
     return (
-      <div className={"player " + (activeString || 'inactive')}>
+      <div className={'player ' + (activeString || 'inactive')}>
         <h1 ref='score'>{myScore}</h1>
         <p>{_.uniq(tally).length - 1}</p>
       </div>
@@ -116,7 +114,7 @@ let Player = class Player extends React.Component {
   }
 }
 
-export default class App extends React.Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.counter = 0;
@@ -129,7 +127,7 @@ export default class App extends React.Component {
       lastPress: Date.now()
     }
 
-    window.addEventListener('keypress', this.handlekeypress.bind(this));
+    window.addEventListener('keyup', this.handlekeypress.bind(this));
   }
 
   handlekeypress(e) {

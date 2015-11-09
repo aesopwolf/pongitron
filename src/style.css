@@ -1,8 +1,3 @@
-/*
-#ef4988
-#27A0BC
-*/
-
 body, html {
   height: 100%;
 }
@@ -40,8 +35,12 @@ button {
   border-radius: 2em;
 }
 
-#app {
+#root {
   background-color: #222;
+  height: 100%;
+}
+
+#root > div {
   height: 100%;
 }
 
@@ -189,7 +188,7 @@ button {
   left: 50%;
   background: #333;
   content: '11';
-  text-align: center
+  text-align: center;
   color: #fff;
 }
 
